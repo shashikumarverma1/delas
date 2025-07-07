@@ -1342,7 +1342,7 @@
 
 "@react-navigation/bottom-tabs@^7.4.2":
   version "7.4.2"
-  resolved "https://registry.npmjs.org/@react-navigation/bottom-tabs/-/bottom-tabs-7.4.2.tgz"
+  resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-7.4.2.tgz#8d721ce399565185c1e82f2048b50945e9d7860e"
   integrity sha512-jyBux5l3qqEucY5M/ZWxVvfA8TQu7DVl2gK+xB6iKqRUfLf7dSumyVxc7HemDwGFoz3Ug8dVZFvSMEs+mfrieQ==
   dependencies:
     "@react-navigation/elements" "^2.5.2"
@@ -3697,6 +3697,11 @@ react-native-is-edge-to-edge@^1.1.6:
   version "1.2.1"
   resolved "https://registry.npmjs.org/react-native-is-edge-to-edge/-/react-native-is-edge-to-edge-1.2.1.tgz"
   integrity sha512-FLbPWl/MyYQWz+KwqOZsSyj2JmLKglHatd3xLZWskXOpRaio4LfEDEz8E/A6uD8QoTHW6Aobw1jbEwK7KMgR7Q==
+
+react-native-safe-area-context@^5.5.1:
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-5.5.1.tgz#9fac8ae5da8b9ff6f77eb3f697e073f04a1f2f3f"
+  integrity sha512-WYxV+mm7SWuapVWxq2071lkQlDUXjSwcu7Cc2bUtNcF80/Bl0WnuWAZ8+tO46M38PclMrQIIgbv83BvDHJNQ5g==
 
 react-native@0.79.5:
   version "0.79.5"
