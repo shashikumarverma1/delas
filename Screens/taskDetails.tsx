@@ -3,6 +3,7 @@ import useFormStore from "../store/useFormStore";
 import React = require("react");
 import { useRoute } from "@react-navigation/core";
 import { CustomHeader } from "../components/customHeader";
+import moment = require("moment");
 
 export const TaskDetails = ({ navigation }) => {
     const route = useRoute()
@@ -27,7 +28,7 @@ console.log(item?.dueDate)
                 <Text>Title: {item?.title}</Text>
                 <Text>Description: {item?.description}</Text>
                 <Text>Priority: {item?.priority}</Text>
-                <Text>Due Date: {item?.dueDate}</Text>
+                <Text>Due Date: {moment(item?.dueDate).format('DD MMMM YYYY')}</Text>
                 <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10, justifyContent: "space-between" }}>
                     <TouchableOpacity style={styles.editContainer} onPress={onPressEdit}><Text style={styles.title}>Edit</Text></TouchableOpacity>
                     <TouchableOpacity style={styles.deleteContainer} onPress={onPressDelete}><Text style={styles.title}>Delete </Text></TouchableOpacity>

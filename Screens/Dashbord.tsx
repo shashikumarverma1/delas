@@ -2,6 +2,7 @@ import { View, Text, Touchable, TouchableOpacity, StyleSheet, FlatList } from "r
 import useFormStore from "../store/useFormStore";
 import React = require("react");
 import { CustomHeader } from "../components/customHeader";
+import moment = require("moment");
 
 export const Dashbord = ({ navigation }) => {
     const { addData, dataList } = useFormStore();
@@ -41,7 +42,7 @@ export const Dashbord = ({ navigation }) => {
                     <Text>Title: {item?.title}</Text>
                     <Text>status: {item?.isCompleted ? "Completed" : "Incomplete"}</Text>
                     <Text>Priority: {item?.priority}</Text>
-                    <Text>Due Date: {item?.dueDate}</Text>
+                    <Text>Due Date: {moment(item?.dueDate).format('DD MMMM YYYY')}</Text>
                     <Text>Description: {item?.description}</Text>
                     <TouchableOpacity
                         onPress={() => navigation.navigate("TaskDetails" , { item })}

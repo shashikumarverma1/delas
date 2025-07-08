@@ -4,6 +4,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import useFormStore from "../store/useFormStore";
 import { CustomHeader } from "../components/customHeader";
 import { CommonActions, useRoute } from "@react-navigation/core";
+import moment = require("moment");
 
 export const TaskScreen = ({ navigation }) => {
     const route=useRoute()
@@ -14,7 +15,7 @@ export const TaskScreen = ({ navigation }) => {
     const [index, setIndex] = useState(null);
     const [description, setDescription] = useState(item?.description || '');
     const [priority, setPriority] = useState(item?.priority || 'Low');
-    const [dueDate, setDueDate] = useState( '');
+    const [dueDate, setDueDate] = useState(item?.dueDate || '');
     const [titleError, setTitleError] = useState('');
     const [dueDateError, setDueDateError] = useState('');
     const priorities = [
@@ -23,19 +24,20 @@ export const TaskScreen = ({ navigation }) => {
         { label: 'High', value: 'high', color: '#F44336' },     // red
     ];
     const handleDateChange = (event, selectedDate) => {
+        console.log(event, selectedDate, "event");
         setShowDatePicker(false);
         if (selectedDate) {
             setDueDate(selectedDate);
         }
     };
-
+console.log(item?.dueDate , "item")
     useEffect(() => {
 if(item){
   let index=  dataList.findIndex((el)=>el===item);
   setIndex(index);
 }
     }, []);
-console.log("item", item , index);
+
     const onPressAdd = useCallback(() => {
 
         if (!title) {
@@ -49,19 +51,22 @@ console.log("item", item , index);
 
 
         const taskData = {
-            title, description, priority, dueDate: dueDate?.toLocaleDateString(), isCompleted: dataList?.length % 2 === 0
+            title, description, priority, dueDate: dueDate, isCompleted: dataList?.length % 2 === 0
         }
+        console.log(dataList?.length , 'taskData');
+        // return
         if(item){
 editData(index, taskData);
-  navigation.dispatch(
+
+        }else{
+        addData(taskData);
+        }
+          navigation.dispatch(
   CommonActions.reset({
     index: 0,
     routes: [{ name: 'Dashbord' }], // or 'Login', 'Dashboard', etc.
   })
 );
-        }else{
- addData(taskData);
-        }
        
     }, [dueDate, titleError, dueDateError, title, description, priority]);
 
@@ -94,6 +99,7 @@ editData(index, taskData);
     const onPessBack = useCallback(() => {
         navigation.goBack();
     }, [navigation]);
+    // console.log(dueDate , "dueDate")
     return <>
         <CustomHeader navigation={navigation} leftLeble="< back" rightLeble="" onPessBack={onPessBack} />
         <View style={styles.container}>
@@ -124,9 +130,9 @@ editData(index, taskData);
                     setShowDatePicker(!showDatePicker)
                 }}>
                 <TextInput
-
-                    //   onChangeText={setPassword}
-                    value={dueDate ? dueDate : ''}
+                    value={dueDate ? moment(dueDate).format('DD MMMM YYYY') 
+                        : dueDate ? moment(item?.dueDate).format('DD MMMM YYYY') : ''}
+            
                     editable={false}
                     placeholder="Please select a date"
                 />
@@ -139,7 +145,7 @@ editData(index, taskData);
                     mode="date"
                     display={Platform.OS === 'ios' ? 'inline' : 'default'}
                     onChange={handleDateChange}
-                    value={dueDate || new Date()}
+                    value={dueDate ? new Date(dueDate) : new Date()}
                 />
             )}
             <Text style={styles.title}>Priority</Text>
