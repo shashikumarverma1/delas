@@ -12,7 +12,6 @@ export const TaskDetails = ({ navigation }) => {
     const onPessBack = React.useCallback(() => { navigation.goBack() }, [navigation])
    const onPressDelete=React.useCallback(()=>{
     let index = dataList.findIndex((el)=>el===item);
-    console.log(item , index)
     removeData(index);
     navigation.goBack();
    },[navigation])
@@ -20,7 +19,7 @@ export const TaskDetails = ({ navigation }) => {
     const onPressEdit = React.useCallback(() => {
           navigation.navigate("TaskScreen", { item });
      }, [navigation, item]);
-console.log(item?.dueDate)
+
     return (
         <View >
             <CustomHeader navigation={navigation} leftLeble={"<- Go back"} rightLeble={""} onPessBack={onPessBack} />

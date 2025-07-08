@@ -8,7 +8,6 @@ export const Dashbord = ({ navigation }) => {
     const { addData, dataList } = useFormStore();
     const [filterValue, setFilterValue] = React.useState('All');
     const handleFilterChange = React.useCallback((value) => { setFilterValue(value) }, [setFilterValue, filterValue]);
-    console.log("data", dataList);
 
     const filteredData = React.useMemo(() => {
         if (filterValue === 'All') return dataList;
