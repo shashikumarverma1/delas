@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 // import { Forms } from "../screens";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Home } from "../Screens/home";
-import { Details } from "../Screens/details";
+import { Home } from "../Screens/Dashbord";
+import { Details } from "../Screens/taskDetails";
 
 // import RootStack from "./rootStack";
 const Tab = createBottomTabNavigator();
