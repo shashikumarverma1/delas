@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Home } from "../Screens/Dashbord";
 import { Details } from "../Screens/taskDetails";
+import HomeStack from "./homeStack";
+import { Videos } from "../Screens/videos";
 
 // import RootStack from "./rootStack";
 const Tab = createBottomTabNavigator();
@@ -18,7 +20,7 @@ function BottomTabs() {
           if (route.name === "Home") {
             iconName = focused ? "home" : "home-outline";
           } 
-             if (route.name === "Home2") {
+             if (route.name === "Videos") {
             iconName = focused ? "home" : "home-outline";
           } 
         
@@ -28,8 +30,8 @@ function BottomTabs() {
         tabBarInactiveTintColor: "gray",
       })}
     >
-      <Tab.Screen name="Home" component={Home} />
-  <Tab.Screen name="Home2" component={Details} />
+      <Tab.Screen name="Home" component={HomeStack} />
+  <Tab.Screen name="Videos" component={Videos} />
     
     </Tab.Navigator>
   );
