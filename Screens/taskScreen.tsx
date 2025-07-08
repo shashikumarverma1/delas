@@ -113,7 +113,7 @@ export const TaskScreen = ({ navigation }) => {
             {memoizedTitleError}
             <Text style={styles.title} >Description</Text>
             <TextInput
-                style={[styles.input, { height: 100 }]}
+                style={[styles.input, styles.textArea]}
                 onChangeText={onChangeDescription}
                 value={description}
                 multiline={true}
@@ -175,6 +175,9 @@ export const TaskScreen = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+    textArea:{
+    height: 100 
+    },
     selectedPriority: {
         backgroundColor: "#000000",
         padding: 10,

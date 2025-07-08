@@ -1,11 +1,11 @@
-import { View, Text, Touchable, TouchableOpacity, StyleSheet, FlatList } from "react-native"
+import { View, Text, TouchableOpacity, StyleSheet, FlatList } from "react-native"
 import useFormStore from "../store/useFormStore";
 import React = require("react");
 import { CustomHeader } from "../components/customHeader";
 import moment = require("moment");
 
 export const Dashbord = ({ navigation }) => {
-    const { addData, dataList } = useFormStore();
+    const { dataList } = useFormStore();
     const [filterValue, setFilterValue] = React.useState('All');
     const handleFilterChange = React.useCallback((value) => { setFilterValue(value) }, [setFilterValue, filterValue]);
 
@@ -16,7 +16,7 @@ export const Dashbord = ({ navigation }) => {
 
     return <View>
         <CustomHeader navigation={navigation} leftLeble={"Dashbord"} rightLeble={"+ Add Task"} />
-        <View style={{ padding: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <View style={styles.buttonContainer}>
             {['All', 'Completed', 'Incomplete'].map((el, index) => {
                 return (
                     <TouchableOpacity
@@ -33,19 +33,19 @@ export const Dashbord = ({ navigation }) => {
         </View>
         <FlatList
             style={{ marginTop: 20 }}
-            contentContainerStyle={{ paddingHorizontal: 20 , paddingBottom: 200 }}
+            contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 200 }}
             data={filteredData}
             keyExtractor={(_, index) => index.toString()}
             renderItem={({ item, index }) => (
-                <View key={index} style={{ padding: 10, borderBottomWidth: 1, borderColor: '#ccc' }}>
+                <View key={index} style={styles.renderItemContainer}>
                     <Text>Title: {item?.title}</Text>
                     <Text>status: {item?.isCompleted ? "Completed" : "Incomplete"}</Text>
                     <Text>Priority: {item?.priority}</Text>
                     <Text>Due Date: {moment(item?.dueDate).format('DD MMMM YYYY')}</Text>
-                    <Text>Description: {item?.description}</Text>
+                   {item?.description && <Text>Description: {item?.description}</Text>}
                     <TouchableOpacity
-                        onPress={() => navigation.navigate("TaskDetails" , { item })}
-                        style={{ padding: 10, borderRadius: 5, marginTop: 10 , flexDirection:"row" , backgroundColor:'#007BFF' , justifyContent:"center" }}><Text style={{color:"#ffffff" , textAlign:"center"}}>View Detals</Text></TouchableOpacity>
+                        onPress={() => navigation.navigate("TaskDetails", { item })}
+                        style={{ padding: 10, borderRadius: 5, marginTop: 10, flexDirection: "row", backgroundColor: '#007BFF', justifyContent: "center" }}><Text style={{ color: "#ffffff", textAlign: "center" }}>View Detals</Text></TouchableOpacity>
                 </View>
             )}
         />
@@ -54,6 +54,26 @@ export const Dashbord = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+    renderItemContainer: {
+        backgroundColor: '#f8f8f8',
+        padding: 20,
+        borderRadius: 10,
+        marginBottom: 20,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    buttonContainer: {
+        padding: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
     title: {
         fontWeight: "500",
         fontSize: 20,
