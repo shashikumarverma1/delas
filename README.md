@@ -11,6 +11,7 @@ A powerful mobile app built with **React Native**, allowing users to manage dail
 - Mark tasks as completed/incomplete
 - Set priority and due date
 - View task details
+- Edit task delete task
 
 ### 🎥 Video Section
 - List online videos
