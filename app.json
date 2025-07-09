@@ -12,7 +12,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    
     "ios": {
       "supportsTablet": true
     },
@@ -21,10 +20,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.shashi7408998113.dels"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9e49f59f-8627-4462-a47a-cba148d3a376"
+      }
     }
   }
 }
