@@ -49,7 +49,7 @@ export const TaskScreen = ({ navigation }) => {
 
 
         const taskData = {
-            title, description, priority, dueDate: dueDate, isCompleted: dataList?.length % 2 === 0
+            title, description, priority, dueDate: dueDate, isCompleted: false
         }
         
         // return

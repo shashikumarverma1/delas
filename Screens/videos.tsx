@@ -29,7 +29,7 @@ export const Videos = ({ navigation }) => {
 
     <FlatList
       ListEmptyComponent={
-        <Text style={{ textAlign: 'center', marginTop: 20, color: 'gray', fontSize: 16 }}>
+      !loading &&  <Text style={{ textAlign: 'center', marginTop: 20, color: 'gray', fontSize: 16 }}>
           No video found.
         </Text>}
       data={videos}
