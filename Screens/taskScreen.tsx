@@ -155,6 +155,7 @@ export const TaskScreen = ({ navigation }) => {
                     ), [priority]);
 
                     return <TouchableOpacity
+                    style={{width: '30%' ,}}
                         onPress={() => handelSelectPriority(element.label)}
                         key={index}><Text style={[textStyle]}>{element.label}</Text></TouchableOpacity>
                 })}
@@ -184,6 +185,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         color: "#fff",
         fontWeight: "bold",
+       textAlign:"center"
 
     },
     notSelectedPriority: {
@@ -193,6 +195,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         color: "#fff",
         fontWeight: "bold",
+        textAlign:"center"
 
     },
     err: {
@@ -223,6 +226,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         paddingVertical: 10,
+        
 
     },
     container: {
