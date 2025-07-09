@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import * as FileSystem from 'expo-file-system';
+import * as MediaLibrary from 'expo-media-library';
 export interface VideoItem {
   thumbnailUrl: any;
   title: string;
@@ -17,12 +18,12 @@ interface OfflineVideoStore {
   updateProgress: (id: string, progress: number) => void;
   markDownloaded: (id: string, filePath: string) => void;
   clearAll: () => void;
-  downloadAndTrack:(video:VideoItem)=>void;
-    getDownloadedVideos: () => VideoItem[];
+  downloadAndTrack: (video: VideoItem) => void;
+  getDownloadedVideos: () => VideoItem[];
 }
 
 export const useVideoStore = create<OfflineVideoStore>((set, get) => ({
-    
+
   videos: [],
 
   setVideos: (videos) => set({ videos }),
@@ -55,10 +56,15 @@ export const useVideoStore = create<OfflineVideoStore>((set, get) => ({
 
   clearAll: () => set({ videos: [] }),
   getDownloadedVideos: () => {
-  const { videos } = get();
-  return videos.filter((v) => v.isDownloaded);
-},
+    const { videos } = get();
+    return videos.filter((v) => v.isDownloaded);
+  },
   downloadAndTrack: async (video) => {
+    const { status } = await MediaLibrary.requestPermissionsAsync();
+    if (status !== 'granted') {
+      alert('Permission denied to access media library!');
+      return;
+    }
     const filename = `${video.title.replace(/\s/g, '_')}.mp4`;
     const destination = FileSystem.documentDirectory + filename;
     try {
@@ -67,20 +73,20 @@ export const useVideoStore = create<OfflineVideoStore>((set, get) => ({
         destination,
         {},
         (downloadProgress) => {
-          
+
           const percent = Math.floor(
             (downloadProgress.totalBytesWritten /
               downloadProgress.totalBytesExpectedToWrite) *
-              100
+            100
           );
-          get().updateProgress(video?.id, percent );
+          get().updateProgress(video?.id, percent);
         }
       );
-  
+
       const result = await downloadResumable.downloadAsync();
-  
+
       if (result?.uri) {
-        get().markDownloaded( video?.id, result.uri);
+        get().markDownloaded(video?.id, result.uri);
       }
     } catch (err) {
       console.error('Download error:', err);

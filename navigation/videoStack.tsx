@@ -12,7 +12,7 @@ const Stack = createStackNavigator<VideoStackParamList>();
 function VideoStack() {
   return (
     <Stack.Navigator screenOptions={{ animationEnabled: false, headerShown: false }}>
-        <Stack.Screen name="Videos" component={Videos} />
+        <Stack.Screen name="VideoHome" component={Videos} />
       <Stack.Screen name="OfflineVideoScreen" component={OfflineVideoScreen} />
     </Stack.Navigator>
   );
