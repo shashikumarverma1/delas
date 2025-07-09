@@ -89,6 +89,7 @@ export const useVideoStore = create<OfflineVideoStore>((set, get) => ({
         get().markDownloaded(video?.id, result.uri);
       }
     } catch (err) {
+      alert("❌ Download Failed" + " " + err?.message);
       console.error('Download error:', err);
     }
   }
