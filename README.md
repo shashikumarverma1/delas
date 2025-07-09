@@ -30,27 +30,33 @@ A powerful mobile app built with **React Native**, allowing users to manage dail
 - **TypeScript** – Type safety
 
 ---
-📦 your-app
-  📁 component
- ┃ ┣ 📄 customHeader.tsx
- ┃ ┣ 📄 renderVideoCard.tsx
- ┃ ┣ 📄 videoDownloadUi.tsx
-    📁navigation
- ┃ ┣ 📄 bottomNavigation
- ┃ ┣ 📄 homeStack
- ┃ ┣ 📄 videoStack
- ┣ 📁 Screens
- ┃ ┣ 📄 Dashbord.tsx
- ┃ ┣ 📄 TaskScreen.tsx
- ┃ ┣ 📄 TaskDetails.tsx
- ┃ ┣ 📄 Videos.tsx
- ┃ ┣ 📄 offLineVideoList.tsx
- ┣ 📁 store
- ┃ ┣ 📄 useFormStore.ts
- ┃ ┣ 📄 useVideoStore.ts
- ┣ 📄 App.tsx
- ┣ 📄 README.md
- ┣ 📄 app.json
+<pre><code>
+your-app/
+├── 📁 component                # Reusable UI components
+│   ├── customHeader.tsx       # Custom header for screens
+│   ├── renderVideoCard.tsx    # Renders individual video cards
+│   ├── videoDownloadUi.tsx    # UI for download button or progress
+│
+├── 📁 navigation               # React Navigation stack & tab configs
+│   ├── bottomNavigation.tsx   # Bottom tab navigator
+│   ├── homeStack.tsx          # Task-related screens stack
+│   ├── videoStack.tsx         # Video-related screens stack
+│
+├── 📁 Screens                  # Main app screens
+│   ├── Dashbord.tsx           # App home/dashboard screen
+│   ├── TaskScreen.tsx         # Task list and add screen
+│   ├── TaskDetails.tsx        # Task detail view
+│   ├── Videos.tsx             # Online video listing
+│   ├── offLineVideoList.tsx   # Shows downloaded/offline videos
+│
+├── 📁 store                    # Zustand global state management
+│   ├── useFormStore.ts        # Form/task state (persisted)
+│   ├── useVideoStore.ts       # Video state (persisted)
+│
+├── App.tsx                    # Entry point of the app
+├── app.json                   # Expo configuration
+├── README.md                  # This file
+</code></pre>
 
 ## 📦 Installation
 
