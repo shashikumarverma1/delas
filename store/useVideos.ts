@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-
+import * as FileSystem from 'expo-file-system';
 export interface VideoItem {
   thumbnailUrl: any;
   title: string;
-  url: string;
+  videoUrl: string;
   filePath?: string;       // after download
   isDownloaded?: boolean;
   progress?: number;
@@ -16,9 +16,11 @@ interface OfflineVideoStore {
   updateProgress: (title: string, progress: number) => void;
   markDownloaded: (title: string, filePath: string) => void;
   clearAll: () => void;
+  downloadAndTrack:(video:VideoItem)=>void;
+    getDownloadedVideos: () => VideoItem[];
 }
 
-export const useVideoStore = create<OfflineVideoStore>((set) => ({
+export const useVideoStore = create<OfflineVideoStore>((set, get) => ({
     
   videos: [],
 
@@ -51,4 +53,41 @@ export const useVideoStore = create<OfflineVideoStore>((set) => ({
     })),
 
   clearAll: () => set({ videos: [] }),
+  getDownloadedVideos: () => {
+  const { videos } = get();
+  return videos.filter((v) => v.isDownloaded);
+},
+  downloadAndTrack: async (video) => {
+    const filename = `${video.title.replace(/\s/g, '_')}.mp4`;
+    const destination = FileSystem.documentDirectory + filename;
+    console.log(video , "destination");
+  // return
+    try {
+      const downloadResumable = FileSystem.createDownloadResumable(
+        video.videoUrl,
+        destination,
+        {},
+        (downloadProgress) => {
+          
+          const percent = Math.floor(
+            (downloadProgress.totalBytesWritten /
+              downloadProgress.totalBytesExpectedToWrite) *
+              100
+          );
+          // alert(`Download progress: ${percent}%`);
+          get().updateProgress(video.title, percent );
+        }
+      );
+  
+      const result = await downloadResumable.downloadAsync();
+  
+      if (result?.uri) {
+        get().markDownloaded(video.title, result.uri);
+        // alert( `${result.uri}`);
+        console.log('Download completed:', result.uri);
+      }
+    } catch (err) {
+      console.error('Download error:', err);
+    }
+  }
 }));

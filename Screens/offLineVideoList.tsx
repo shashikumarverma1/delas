@@ -1,37 +1,28 @@
 import React, { useEffect } from 'react';
-import { View, Text, Button, FlatList } from 'react-native';
-import { useOfflineVideoStore } from '../store/useOffLineVideos';
+import { View, Text, Button, FlatList, Image } from 'react-native';
+
 import { CustomHeader } from '../components/customHeader';
+import { Video } from 'expo-av';
+import { useVideoStore } from '../store/useVideos';
+import VideoItemCard from '../components/renderVideoCard';
 
-
-const OfflineVideoScreen = ({navigation}) => {
-  const { videos, downloadAndTrack } = useOfflineVideoStore();
-// console.log("videos", videos);
-const onPessBack = React.useCallback(() => navigation.goBack(), [navigation]);
+const OfflineVideoScreen = ({ navigation }) => {
+  const { videos , downloadAndTrack , getDownloadedVideos } = useVideoStore();
+  // console.log("videos", videos);
+  const onPessBack = React.useCallback(() => navigation.goBack(), [navigation]);
   return (
-  <View>
-<CustomHeader navigation={navigation} leftLeble={"<- Goback"} rightLeble={undefined} onPessBack={onPessBack} onPressRight={undefined}/>
+    <View>
+      <CustomHeader navigation={navigation} leftLeble={"<- Goback"} rightLeble={undefined} onPessBack={onPessBack} onPressRight={undefined} />
       <FlatList
-      data={videos}
-      keyExtractor={(item) => item.title}
-      renderItem={({ item }) => (
-        <View style={{ marginBottom: 16, padding: 10 }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{item.title}</Text>
-
-          {item.isDownloaded ? (
-            <Text style={{ color: 'green' }}>✅ Downloaded</Text>
-          ) : (
-            <>
-              <Text style={{ color: 'orange' }}>
-                Downloading: {item.progress ?? 0}%
-              </Text>
-              <Button title="Download" onPress={() => downloadAndTrack(item)} />
-            </>
-          )}
-        </View>
-      )}
-    />
-  </View>
+        data={getDownloadedVideos()}
+        keyExtractor={(item) => item.title}
+        renderItem={({ item }) => (
+     <>
+         <VideoItemCard item={item} downloadAndTrack={downloadAndTrack}/>
+     </>
+        )}
+      />
+    </View>
   );
 };
 
