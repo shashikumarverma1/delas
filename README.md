@@ -62,21 +62,14 @@ your-app/
 <p>Here are a few enhancements planned for future versions of the app:</p>
 
 <ul>
-  <li>
-    <strong>Sort by Due Date:</strong>
-    <br />
-    Enable sorting tasks based on their due dates to help users prioritize upcoming deadlines effectively.
-  </li>
+ 
   <li>
     <strong>Persistence After Hard Reload:</strong>
     <br />
     Although AsyncStorage is used, improvements can be made to ensure that all data persists reliably even after a full reload or app reinstall.
   </li>
   <li>
-    <strong>Sort by Priority:</strong>
-    <br />
-    Add functionality to filter or sort tasks based on their priority level (e.g., High, Medium, Low), offering better task organization and urgency handling.
-  </li>
+ 
 </ul>
 
 ## 📦 Installation

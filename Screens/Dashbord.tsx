@@ -10,18 +10,42 @@ export const Dashbord = ({ navigation }) => {
     const [filterValue, setFilterValue] = React.useState('All');
     const handleFilterChange = React.useCallback((value) => { setFilterValue(value) }, [setFilterValue, filterValue]);
 
+   
     const filteredData = React.useMemo(() => {
-        if (filterValue === 'All') return dataList;
-        return dataList.filter(item => filterValue === 'Completed' ? item.isCompleted : !item.isCompleted);
-    }, [dataList, filterValue]);
+  let filtered = [...dataList];
+
+  // Filter by status
+  if (filterValue === 'Completed') {
+    filtered = filtered.filter(item => item.isCompleted);
+  } else if (filterValue === 'Incomplete') {
+    filtered = filtered.filter(item => !item.isCompleted);
+  }
+
+  // Sort by dueDate or priority
+  if (filterValue === 'date') {
+    filtered.sort((a, b) => {
+      const dateA = new Date(a.dueDate).getTime();
+      const dateB = new Date(b.dueDate).getTime();
+      return dateA - dateB;
+    });
+  } else if (filterValue === 'priority') {
+    const priorityOrder = { High: 1, Medium: 2, Low: 3 };
+    filtered.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+  }
+
+  return filtered;
+}, [dataList, filterValue, ]);
+
 
     const onPressRight = React.useCallback(() => navigation.navigate("TaskScreen"), [navigation]);
 
 
     return <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <CustomHeader navigation={navigation} leftLeble={"Dashbord"} rightLeble={"+ Add Task"} onPressRight={onPressRight} />
+        <Text style={styles.sortBy}>Sort by</Text>
         <View style={styles.buttonContainer}>
-            {['All', 'Completed', 'Incomplete'].map((el, index) => {
+          
+            {['All', 'Completed', 'Incomplete' , "date" , "priority"].map((el, index) => {
                 const priorityStyle = React.useMemo(() => {
                     return filterValue === el ? styles.selectedPriority : styles.notSelectedPriority;
                 }, [filterValue, el]);
@@ -66,7 +90,13 @@ export const Dashbord = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-    
+    sortBy:{
+        fontSize: 18,
+        fontWeight: "bold",
+        color: "#000000",
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+    },
     status:{
         backgroundColor: '#dfefef',
         padding: 10,
@@ -109,10 +139,16 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     buttonContainer: {
-        padding: 20,
+        paddingHorizontal: 20,
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+        // justifyContent: 'space-between',
+        alignItems: 'center',
+          flexWrap: 'wrap',
+        textAlign: 'center',
+        // flexDirection: 'row',
+        alignContent: 'center',
+        alignSelf: 'center',
+        
     },
     title: {
         fontWeight: "500",
@@ -131,6 +167,8 @@ const styles = StyleSheet.create({
         width: "30%",
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop:5
+      
     },
     notSelectedPriority: {
         backgroundColor: "grey",
