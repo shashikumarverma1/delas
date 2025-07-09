@@ -1,9 +1,7 @@
 import React = require("react")
-import { View, FlatList, Text, Image, TouchableOpacity } from "react-native"
-import { Video } from 'expo-av';
+import { View, FlatList, StyleSheet } from "react-native"
 import { useVideoStore } from "../store/useVideos";
 import { CustomHeader } from "../components/customHeader";
-import VideoDownloadUI from "../components/videoDownloadUi";
 import VideoItemCard from "../components/renderVideoCard";
 
 
@@ -13,19 +11,18 @@ export const Videos = ({ navigation }) => {
   React.useEffect(() => {
     fetchVideos();
   }, []);
- const filteredVideos = videos.filter((video) => !video.isDownloaded);
-
+ const filteredVideos = videos.filter((video) => video.isDownloaded);
   const onPressRight = React.useCallback(() => navigation.navigate("OfflineVideoScreen"), [navigation])
-  // console.log("videos", OfflineVideos);
+
   return <View style={{ flex: 1, backgroundColor: '#fff' }}>
 
-    <CustomHeader navigation={navigation} leftLeble={"videos"} rightLeble={"OfflineVideo"} onPressRight={onPressRight} />
+    <CustomHeader navigation={navigation} leftLeble={"videos"} rightLeble={"✅ Offline"} onPressRight={onPressRight} onPessBack={undefined} />
 
     <FlatList
       data={videos}
-      keyExtractor={(item , index) =>item.title + index.toString()}
+      keyExtractor={(item , index) =>item?.id}
       renderItem={({ item }) => {
-        console.log("item", item);
+     
         return (
         <VideoItemCard item={item} downloadAndTrack={downloadAndTrack}/>
         )
@@ -36,3 +33,7 @@ export const Videos = ({ navigation }) => {
 
 
 }
+
+const styles = StyleSheet.create({
+
+})

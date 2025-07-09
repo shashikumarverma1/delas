@@ -7,14 +7,15 @@ export interface VideoItem {
   filePath?: string;       // after download
   isDownloaded?: boolean;
   progress?: number;
+  id?: string;             // optional, if you want to store a unique identifier
 }
 
 interface OfflineVideoStore {
   videos: VideoItem[];
   setVideos: (videos: VideoItem[]) => void;
   fetchVideos: () => Promise<void>;
-  updateProgress: (title: string, progress: number) => void;
-  markDownloaded: (title: string, filePath: string) => void;
+  updateProgress: (id: string, progress: number) => void;
+  markDownloaded: (id: string, filePath: string) => void;
   clearAll: () => void;
   downloadAndTrack:(video:VideoItem)=>void;
     getDownloadedVideos: () => VideoItem[];
@@ -38,17 +39,17 @@ export const useVideoStore = create<OfflineVideoStore>((set, get) => ({
     }
   },
 
-  updateProgress: (title, progress) =>
+  updateProgress: (id, progress) =>
     set((state) => ({
       videos: state.videos.map((v) =>
-        v.title === title ? { ...v, progress } : v
+        v.id === id ? { ...v, progress } : v
       ),
     })),
 
-  markDownloaded: (title, filePath) =>
+  markDownloaded: (id, filePath) =>
     set((state) => ({
       videos: state.videos.map((v) =>
-        v.title === title ? { ...v, isDownloaded: true, filePath } : v
+        v.id === id ? { ...v, isDownloaded: true, filePath } : v
       ),
     })),
 
@@ -60,8 +61,6 @@ export const useVideoStore = create<OfflineVideoStore>((set, get) => ({
   downloadAndTrack: async (video) => {
     const filename = `${video.title.replace(/\s/g, '_')}.mp4`;
     const destination = FileSystem.documentDirectory + filename;
-    console.log(video , "destination");
-  // return
     try {
       const downloadResumable = FileSystem.createDownloadResumable(
         video.videoUrl,
@@ -75,16 +74,14 @@ export const useVideoStore = create<OfflineVideoStore>((set, get) => ({
               100
           );
           // alert(`Download progress: ${percent}%`);
-          get().updateProgress(video.title, percent );
+          get().updateProgress(video?.id, percent );
         }
       );
   
       const result = await downloadResumable.downloadAsync();
   
       if (result?.uri) {
-        get().markDownloaded(video.title, result.uri);
-        // alert( `${result.uri}`);
-        console.log('Download completed:', result.uri);
+        get().markDownloaded( video?.id, result.uri);
       }
     } catch (err) {
       console.error('Download error:', err);

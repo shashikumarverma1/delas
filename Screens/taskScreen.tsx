@@ -98,7 +98,7 @@ export const TaskScreen = ({ navigation }) => {
     }, [navigation]);
     
     return <>
-        <CustomHeader navigation={navigation} leftLeble="< back" rightLeble="" onPessBack={onPessBack} />
+        <CustomHeader navigation={navigation} leftLeble="< back" rightLeble="" onPessBack={onPessBack} onPressRight={undefined} />
         <View style={styles.container}>
 
             <Text style={styles.title}>Title</Text>
@@ -138,7 +138,6 @@ export const TaskScreen = ({ navigation }) => {
             {memoizedDueDateError}
             {showDatePicker && (
                 <DateTimePicker
-                    //   value={dueDate || new Date()}
                     mode="date"
                     display={Platform.OS === 'ios' ? 'inline' : 'default'}
                     onChange={handleDateChange}

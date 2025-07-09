@@ -22,7 +22,6 @@ const VideoDownloadUI = ({ item, downloadAndTrack }) => {
     ) : (
       <TouchableOpacity
         onPress={() => {
-          console.log('item', item);
           downloadAndTrack(item);
         }}
         style={{

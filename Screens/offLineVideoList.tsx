@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
-import { View, Text, Button, FlatList, Image } from 'react-native';
-
+import React, {  } from 'react';
+import { View,  FlatList } from 'react-native';
 import { CustomHeader } from '../components/customHeader';
-import { Video } from 'expo-av';
 import { useVideoStore } from '../store/useVideos';
 import VideoItemCard from '../components/renderVideoCard';
 
 const OfflineVideoScreen = ({ navigation }) => {
-  const { videos , downloadAndTrack , getDownloadedVideos } = useVideoStore();
-  // console.log("videos", videos);
+  const {  downloadAndTrack , getDownloadedVideos } = useVideoStore();
+
   const onPessBack = React.useCallback(() => navigation.goBack(), [navigation]);
   return (
     <View>
