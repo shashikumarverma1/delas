@@ -22,9 +22,9 @@ function BottomTabs() {
             iconName = focused ? "home" : "home-outline";
           } 
              if (route.name === "Videos") {
-            iconName = focused ? "home" : "home-outline";
+            iconName = focused ? "play" : "play-outline";
           } 
-        
+        // <ion-icon name="arrow-dropright-circle"></ion-icon>
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: "#272735",

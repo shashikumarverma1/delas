@@ -1,5 +1,5 @@
 import React = require("react")
-import { View, FlatList, StyleSheet } from "react-native"
+import { View, FlatList, StyleSheet , Text } from "react-native"
 import { useVideoStore } from "../store/useVideos";
 import { CustomHeader } from "../components/customHeader";
 import VideoItemCard from "../components/renderVideoCard";
@@ -19,6 +19,10 @@ export const Videos = ({ navigation }) => {
     <CustomHeader navigation={navigation} leftLeble={"videos"} rightLeble={"✅ Offline"} onPressRight={onPressRight} onPessBack={undefined} />
 
     <FlatList
+          ListEmptyComponent={
+        <Text style={{ textAlign: 'center', marginTop: 20, color: 'gray', fontSize: 16 }}>
+          No video found.
+        </Text>}
       data={videos}
       keyExtractor={(item , index) =>item?.id}
       renderItem={({ item }) => {
