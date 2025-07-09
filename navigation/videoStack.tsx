@@ -1,12 +1,13 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { TaskScreen } from '../Screens/taskScreen';
-import { Dashbord, Home } from '../Screens/Dashbord';
-import { TaskDetails } from '../Screens/taskDetails';
 import { Videos } from '../Screens/videos';
 import OfflineVideoScreen from '../Screens/offLineVideoList';
 
+export type VideoStackParamList = {
+  Videos: undefined;
+  OfflineVideoScreen: undefined;
+};
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<VideoStackParamList>();
 
 function VideoStack() {
   return (

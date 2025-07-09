@@ -51,9 +51,9 @@ const useFormStore = create<FormStore>()(
         }),
     }),
     {
-      name: 'form-store',         // AsyncStorage key
-      storage: AsyncStorage,      // ✅ DIRECT AsyncStorage (no getItem/setItem manually)
-      version: 1,                 // Optional, but good practice
+      name: 'form-store',         
+      storage: AsyncStorage,    
+      version: 1,                 
     }
   )
 );

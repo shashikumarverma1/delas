@@ -73,7 +73,6 @@ export const useVideoStore = create<OfflineVideoStore>((set, get) => ({
               downloadProgress.totalBytesExpectedToWrite) *
               100
           );
-          // alert(`Download progress: ${percent}%`);
           get().updateProgress(video?.id, percent );
         }
       );

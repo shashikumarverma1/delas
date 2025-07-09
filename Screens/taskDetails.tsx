@@ -22,7 +22,7 @@ export const TaskDetails = ({ navigation }) => {
 
     return (
         <View >
-            <CustomHeader navigation={navigation} leftLeble={"<- Go back"} rightLeble={""} onPessBack={onPessBack} />
+            <CustomHeader navigation={navigation} leftLeble={"<- Go back"} rightLeble={""} onPessBack={onPessBack} onPressRight={undefined} />
             <View style={styles.renderItemContainer}>
                 <Text>Title: {item?.title}</Text>
                 <Text>Description: {item?.description}</Text>
@@ -36,7 +36,7 @@ export const TaskDetails = ({ navigation }) => {
         </View>)
 }
 const styles = StyleSheet.create({
-      renderItemContainer: {
+    renderItemContainer: {
         backgroundColor: '#f8f8f8',
         padding: 20,
         borderRadius: 10,

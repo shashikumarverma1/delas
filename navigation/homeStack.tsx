@@ -1,10 +1,26 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { TaskScreen } from '../Screens/taskScreen';
-import { Dashbord, Home } from '../Screens/Dashbord';
+import { Dashbord,  } from '../Screens/Dashbord';
 import { TaskDetails } from '../Screens/taskDetails';
 
 
-const Stack = createStackNavigator();
+interface Item {
+    id: string;
+    title: string;
+    description?: string;
+    dueDate: string;
+    priority: string;
+    isCompleted: boolean;
+  }  
+  
+ type HomeStackParamList = {
+  Dashbord: undefined;
+  TaskScreen: undefined;
+  TaskDetails: { item: Item }; 
+};
+
+
+const Stack = createStackNavigator<HomeStackParamList>();
 
 function HomeStack() {
   return (
