@@ -78,11 +78,13 @@ your-app/
 ```bash
 git clone https://github.com/shashikumarverma1/delas
 cd delas
-<h3>✅ Step 2: Install Dependencies</h3>
-<p>Make sure you have <strong>Node.js</strong>, <strong>npm</strong>, and <strong>Expo CLI</strong> installed.</p>
 
-<pre>
-<code class="language-bash">
+✅ Step 2: Install Dependencies
+Make sure you have Node.js, npm, and Expo CLI installed.
+in terminal 
 npm install
-</code>
-</pre>
+If you don’t have Expo CLI installed globally:
+npm install -g expo-cli
+
+✅ Step 3: Start the App (Expo)
+expo start
