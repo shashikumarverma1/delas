@@ -74,8 +74,9 @@ your-app/
 
 ## 📦 Installation
 
-### Step 1: Clone the Repo
+
 ```bash
+✅ Step 1:Clone the Repo
 git clone https://github.com/shashikumarverma1/delas
 cd delas
 
