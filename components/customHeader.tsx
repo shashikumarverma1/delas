@@ -1,14 +1,15 @@
 import React from "react";
 import { View , TouchableOpacity , StyleSheet , Text, Pressable} from "react-native"
 
- export const CustomHeader=({navigation , leftLeble , rightLeble , onPessBack})=>{
+ export const CustomHeader=({navigation , leftLeble , rightLeble , onPessBack , onPressRight})=>{
     return (
          <View style={styles.header}>
             <Pressable onPress={onPessBack}> <Text style={styles.title}>{leftLeble}</Text></Pressable>
                    
-                     <TouchableOpacity onPress={() => navigation.navigate("TaskScreen")}>
-                    <Text style={styles.title}>
-                     {rightLeble}</Text> </TouchableOpacity>
+                <TouchableOpacity onPress={onPressRight}>
+  <Text style={styles.title}>
+                     {rightLeble}</Text>
+                      </TouchableOpacity>
             </View>
 
     )

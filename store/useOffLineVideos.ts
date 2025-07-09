@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-import RNFS from 'react-native-fs';
+import * as FileSystem from 'expo-file-system';
 
 export interface VideoItem {
   title: string;
-  url: string;
+  videoUrl: string;
   filePath?: string;
   isDownloaded?: boolean;
   progress?: number;
@@ -38,34 +38,37 @@ export const useOfflineVideoStore = create<OfflineVideoStore>((set, get) => ({
       ),
     })),
 
-  downloadAndTrack: async (video) => {
-    const filename = `${video.title.replace(/\s/g, '_')}.mp4`;
-
-    try {
-      const dest = `${RNFS.DocumentDirectoryPath}/videos/${filename}`;
-      await RNFS.mkdir(`${RNFS.DocumentDirectoryPath}/videos`);
-
-      const options = {
-        fromUrl: video.url,
-        toFile: dest,
-        begin: () => console.log('Download started'),
-        progress: (res: any) => {
-          const percent = Math.floor(
-            (res.bytesWritten / res.contentLength) * 100
-          );
-          get().updateProgress(video.title, percent);
-        },
-      };
-
-      const result = await RNFS.downloadFile(options).promise;
-
-      if (result.statusCode === 200) {
-        get().markDownloaded(video.title, dest);
-      } else {
-        console.error('Download failed');
+downloadAndTrack: async (video) => {
+  const filename = `${video.title.replace(/\s/g, '_')}.mp4`;
+  const destination = FileSystem.documentDirectory + filename;
+  // console.log(video?.videoUrl, "NNNN" , filename, destination , "destination");
+// return
+  try {
+    const downloadResumable = FileSystem.createDownloadResumable(
+      video.videoUrl,
+      destination,
+      {},
+      (downloadProgress) => {
+        
+        const percent = Math.floor(
+          (downloadProgress.totalBytesWritten /
+            downloadProgress.totalBytesExpectedToWrite) *
+            100
+        );
+        alert(`Download progress: ${percent}%`);
+        get().updateProgress(video.title, percent);
       }
-    } catch (err) {
-      console.error('Download error:', err);
+    );
+
+    const result = await downloadResumable.downloadAsync();
+
+    if (result?.uri) {
+      get().markDownloaded(video.title, result.uri);
+      alert( `${result.uri}`);
+      console.log('Download completed:', result.uri);
     }
-  },
+  } catch (err) {
+    console.error('Download error:', err);
+  }
+}
 }));

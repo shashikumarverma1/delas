@@ -18,7 +18,7 @@ interface OfflineVideoStore {
   clearAll: () => void;
 }
 
-export const useOfflineVideoStore = create<OfflineVideoStore>((set) => ({
+export const useVideoStore = create<OfflineVideoStore>((set) => ({
     
   videos: [],
 

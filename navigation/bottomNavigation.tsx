@@ -5,6 +5,7 @@ import { Home } from "../Screens/Dashbord";
 import { Details } from "../Screens/taskDetails";
 import HomeStack from "./homeStack";
 import { Videos } from "../Screens/videos";
+import VideoStack from "./videoStack";
 
 // import RootStack from "./rootStack";
 const Tab = createBottomTabNavigator();
@@ -31,7 +32,7 @@ function BottomTabs() {
       })}
     >
       <Tab.Screen name="Home" component={HomeStack} />
-  <Tab.Screen name="Videos" component={Videos} />
+      <Tab.Screen name="Videos" component={VideoStack} />
     
     </Tab.Navigator>
   );

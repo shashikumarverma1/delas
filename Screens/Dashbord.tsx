@@ -13,9 +13,9 @@ export const Dashbord = ({ navigation }) => {
         if (filterValue === 'All') return dataList;
         return dataList.filter(item => filterValue === 'Completed' ? item.isCompleted : !item.isCompleted);
     }, [dataList, filterValue]);
-
+const onPressRight = React.useCallback(() => navigation.navigate("TaskScreen"), [navigation]);
     return <View>
-        <CustomHeader navigation={navigation} leftLeble={"Dashbord"} rightLeble={"+ Add Task"} />
+        <CustomHeader navigation={navigation} leftLeble={"Dashbord"} rightLeble={"+ Add Task"} onPressRight={onPressRight} />
         <View style={styles.buttonContainer}>
             {['All', 'Completed', 'Incomplete'].map((el, index) => {
                 return (
