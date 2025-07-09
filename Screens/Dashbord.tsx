@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     flateListContainer: {
         backgroundColor: '#fff',
         paddingHorizontal: 20,
-        paddingBottom: 200
+        
     },
     priorityLeble: {
         color: "#fff",
