@@ -30,6 +30,27 @@ A powerful mobile app built with **React Native**, allowing users to manage dail
 - **TypeScript** – Type safety
 
 ---
+📦 your-app
+  📁 component
+ ┃ ┣ 📄 customHeader.tsx
+ ┃ ┣ 📄 renderVideoCard.tsx
+ ┃ ┣ 📄 videoDownloadUi.tsx
+    📁navigation
+ ┃ ┣ 📄 bottomNavigation
+ ┃ ┣ 📄 homeStack
+ ┃ ┣ 📄 videoStack
+ ┣ 📁 Screens
+ ┃ ┣ 📄 Dashbord.tsx
+ ┃ ┣ 📄 TaskScreen.tsx
+ ┃ ┣ 📄 TaskDetails.tsx
+ ┃ ┣ 📄 Videos.tsx
+ ┃ ┣ 📄 offLineVideoList.tsx
+ ┣ 📁 store
+ ┃ ┣ 📄 useFormStore.ts
+ ┃ ┣ 📄 useVideoStore.ts
+ ┣ 📄 App.tsx
+ ┣ 📄 README.md
+ ┣ 📄 app.json
 
 ## 📦 Installation
 
