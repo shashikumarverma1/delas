@@ -72,6 +72,8 @@ const styles = StyleSheet.create({
 
     borderRadius: 10,
     marginVertical: 10,
+    borderColor: 'grey',
+    borderWidth: 1,
   },
 
 })
