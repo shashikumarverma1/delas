@@ -27,10 +27,10 @@ jobs:
       # - name: Write Google Play JSON
       #   run: echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}" > google-play-service.json
 
-      # - name: Build Android App Bundle
-      #   run: eas build -p android --profile production --non-interactive
-      #   env:
-      #     EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      - name: Build Android App Bundle
+        run: eas build -p android --profile production --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       # - name: Submit to Play Store
       #   run: eas submit -p android --profile production --non-interactive
@@ -38,7 +38,7 @@ jobs:
       #     EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       # --- ✅ NEW: BUILD APK ONLY ---
-      - name: Build APK (Standalone Android App)
-        run: eas build -p android --profile preview --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      # - name: Build APK (Standalone Android App)
+      #   run: eas build -p android --profile preview --non-interactive
+      #   env:
+      #     EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
