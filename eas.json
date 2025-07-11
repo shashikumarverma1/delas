@@ -1,18 +1,21 @@
 {
+  "cli": {
+    "version": ">=3.0.0"
+  },
   "build": {
-    "preview": {
+    "production": {
       "android": {
-        "buildType": "apk"
+        "workflow": "managed",
+        "buildType": "app-bundle" 
       }
-    },
-    "preview2": {
+    }
+  },
+  "submit": {
+    "production": {
       "android": {
-        "gradleCommand": ":app:assembleRelease"
+        "serviceAccountKeyPath": "./google-play-service.json"
       }
-    },
-    "preview3": {
-      "developmentClient": true
-    },
-    "production": {}
-  }
+    }
+  },
+  "owner": "shashikumarverma"
 }
