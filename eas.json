@@ -5,7 +5,7 @@
   "build": {
     "production": {
       "android": {
-        "workflow": "managed",
+      
         "buildType": "apk" 
         
       }
@@ -17,6 +17,7 @@
         "serviceAccountKeyPath": "./google-play-service.json"
       }
     }
-  },
-  "owner": "shashikumarverma"
+  }
+ 
 }
+
