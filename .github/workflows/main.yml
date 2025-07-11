@@ -20,10 +20,10 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      # - name: Login to Expo
-      #   run:  echo $EXPO_TOKEN | eas login --token
-      #   env:
-      #     EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      - name: Login to Expo
+        run:  echo $EXPO_TOKEN | eas login --token
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       # - name: Write Google Play JSON
       #   run: echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}" > google-play-service.json
