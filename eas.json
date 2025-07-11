@@ -2,7 +2,7 @@
   "build": {
     "preview": {
       "android": {
-        "buildType": "aab"
+        "buildType": "app-bundle"
       }
     },
     "preview2": {
