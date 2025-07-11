@@ -40,7 +40,7 @@ jobs:
       #     EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       # --- ✅ NEW: BUILD APK ONLY ---
-      - name: Build APK (Standalone Android App)
-        run: eas build -p android --profile production --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      # - name: Build APK (Standalone Android App)
+      #   run: eas build -p android --profile production --non-interactive
+      #   env:
+      #     EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
