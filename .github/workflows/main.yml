@@ -20,22 +20,17 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      - name: Login to Expo
-        run:  whoami
+      # ✅ Check if EXPO_TOKEN is set
+      - name: Validate EXPO_TOKEN
+        run: |
+          if [ -z "$EXPO_TOKEN" ]; then
+            echo "❌ EXPO_TOKEN is not set!"
+            exit 1
+          else
+            echo "✅ EXPO_TOKEN is set."
+          fi
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-
-        
-      - name: Check if EXPO_TOKEN is set
-  run: |
-    if [ -z "$EXPO_TOKEN" ]; then
-      echo "❌ EXPO_TOKEN is not set!"
-      exit 1
-    else
-      echo "✅ EXPO_TOKEN is set."
-    fi
-  env:
-    EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       # --- 🔒 FOR PLAY STORE SUBMISSION (COMMENTED) ---
       # - name: Write Google Play JSON
@@ -52,7 +47,7 @@ jobs:
       #     EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       # --- ✅ NEW: BUILD APK ONLY ---
-      # - name: Build APK (Standalone Android App)
-      #   run: eas build -p android --profile preview
-      #   env:
-      #     EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      - name: Build APK (Standalone Android App)
+        run: eas build -p android --profile preview --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
