@@ -21,16 +21,7 @@ jobs:
         run: npm install -g eas-cli
 
       # ✅ Check if EXPO_TOKEN is set
-      - name: Validate EXPO_TOKEN
-        run: |
-          if [ -z "$EXPO_TOKEN" ]; then
-            echo "❌ EXPO_TOKEN is not set!"
-            exit 1
-          else
-            echo "✅ EXPO_TOKEN is set."
-          fi
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+   
 
       # --- 🔒 FOR PLAY STORE SUBMISSION (COMMENTED) ---
       # - name: Write Google Play JSON
