@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from "react-native"
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, Alert } from "react-native"
 import useFormStore from "../store/useFormStore";
 import React, { useEffect } from "react";
 import { CustomHeader } from "../components/customHeader";
@@ -39,6 +39,44 @@ export const Dashbord = ({ navigation }) => {
 
     const onPressRight = React.useCallback(() => navigation.navigate("TaskScreen"), [navigation]);
 
+    
+  const sendPushNotification = async () => {
+    const message = {
+      to: 'ExponentPushToken[NRlo3PFd2qFBH97a4Lk0Xm]',
+      sound: 'default',
+      title: 'Form Submitted!',
+      body: `${"shashi"} just submitted the form.`,
+      data: { screen: 'FormDetails', name:"shashi", email:"s@gmail.com" },
+    };
+
+    try {
+      const response = await fetch('https://exp.host/--/api/v2/push/send', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Accept-encoding': 'gzip, deflate',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(message),
+      });
+
+      const data = await response.json();
+      console.log('Push sent:', data);
+      Alert.alert('Notification sent!');
+    } catch (error) {
+      console.error('Push send error:', error);
+      Alert.alert('Failed to send notification');
+    }
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      sendPushNotification();
+    }, 10000); // every 1 second
+// alert("sjjs")
+    // Cleanup on unmount
+    return () => clearInterval(intervalId);
+  }, []);
 
     return <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <CustomHeader navigation={navigation} leftLeble={"Dashbord"} rightLeble={"+ Add Task"} onPressRight={onPressRight} />
