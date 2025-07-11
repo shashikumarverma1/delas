@@ -2,7 +2,8 @@
   "build": {
     "preview": {
       "android": {
-        "buildType": "app-bundle"
+        "buildType": "app-bundle",
+           "jdk": "17"  
       }
     },
     "preview2": {

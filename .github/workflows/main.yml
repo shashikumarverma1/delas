@@ -28,7 +28,7 @@ jobs:
       #   run: echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}" > google-play-service.json
 
       - name: Build Android App Bundle
-        run: eas build -p android --profile production --non-interactive
+        run:  eas build -p android --profile production --non-interactive
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
