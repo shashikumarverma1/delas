@@ -41,6 +41,6 @@ jobs:
 
       # --- ✅ NEW: BUILD APK ONLY ---
       - name: Build APK (Standalone Android App)
-        run: eas build -p android --profile production --non-interactive
+        run: eas build -p android --profile preview
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}

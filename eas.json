@@ -1,23 +1,18 @@
 {
-  "cli": {
-    "version": ">=3.0.0"
-  },
   "build": {
-    "production": {
+    "preview": {
       "android": {
-      "workflow": "bare",
-        "buildType": "apk" 
-        
+        "buildType": "apk"
       }
-    }
-  },
-  "submit": {
-    "production": {
+    },
+    "preview2": {
       "android": {
-        "serviceAccountKeyPath": "./google-play-service.json"
+        "gradleCommand": ":app:assembleRelease"
       }
-    }
+    },
+    "preview3": {
+      "developmentClient": true
+    },
+    "production": {}
   }
- 
 }
-
