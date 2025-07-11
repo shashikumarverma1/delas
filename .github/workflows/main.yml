@@ -1,4 +1,4 @@
-name: Expo Android Build & Deploy
+name: EAS Build & Submit to Play Store
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -20,15 +20,20 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      - name: Authenticate with Expo
-        run: eas login --token ${{ secrets.EXPO_TOKEN }}
+      - name: Login to Expo
+         run: echo $EXPO_TOKEN | eas login --token
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Decode Google Play Service Account
-        run: |
-          echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}" > google-play-service.json
+      # - name: Write Google Play JSON
+      #   run: echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}" > google-play-service.json
 
-      - name: Build App Bundle
+      - name: Build Android App Bundle
         run: eas build -p android --profile production --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Submit to Play Store
-        run: eas submit -p android --profile production --non-interactive
+      # - name: Submit to Play Store
+      #   run: eas submit -p android --profile production --non-interactive
+      #   env:
+      #     EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
